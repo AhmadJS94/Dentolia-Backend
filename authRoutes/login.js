@@ -14,7 +14,7 @@ const schema = Joi.object({
 });
 const respondError422 = (res, next) => {
   const err = new Error('Invalid credentials');
-  res.status(409);
+  res.status(422);
   next(err);
 };
 router.post('/', (req, res, next) => {

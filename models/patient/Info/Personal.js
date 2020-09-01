@@ -13,22 +13,27 @@ const PersonalInfoSchema = new mongoose.Schema(
     },
     gender: {
       type: String,
-      required: true,
+      default: '',
+      // required: true,
     },
     age: {
       type: String,
+      default: '',
       // required: true,
     },
     address: {
       type: String,
+      default: '',
       // required: true,
     },
     occupation: {
       type: String,
+      default: '',
       // required: true,
     },
     phoneNumber: {
       type: String,
+      default: '',
       // required: true
     },
   },

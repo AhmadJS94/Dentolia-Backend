@@ -1,4 +1,3 @@
-const express = require('express');
 const jwt = require('jsonwebtoken');
 
 const respondError403 = (res, next) => {
@@ -10,6 +9,7 @@ const checkTokenSetUser = (req, res, next) => {
   const authHeader = req.get('authorization');
   if (authHeader) {
     const token = authHeader.split(' ')[1];
+
     if (token) {
       jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
         if (err) {
@@ -17,7 +17,6 @@ const checkTokenSetUser = (req, res, next) => {
           respondError403(res, next);
         }
         req.user = user;
-        console.log(req.user);
 
         next();
       });
@@ -29,4 +28,11 @@ const checkTokenSetUser = (req, res, next) => {
   }
 };
 
-module.exports = { checkTokenSetUser };
+const isLoggedIn = (req, res, next) => {
+  if (req.user) {
+    next();
+  } else {
+    respondError403(res, next);
+  }
+};
+module.exports = { checkTokenSetUser, isLoggedIn };
